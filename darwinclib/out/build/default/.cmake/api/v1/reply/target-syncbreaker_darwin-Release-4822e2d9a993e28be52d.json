@@ -1,9 +1,8 @@
 {
-	"archive" : {},
 	"artifacts" : 
 	[
 		{
-			"path" : "/Users/mark/dev/projects/golang/appleblox-ext/lib/syncbreaker_darwin.a"
+			"path" : "/Users/mark/dev/projects/golang/appleblox-ext/lib/syncbreaker_darwin.dylib"
 		}
 	],
 	"backtrace" : 1,
@@ -25,7 +24,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 11,
+				"line" : 13,
 				"parent" : 0
 			}
 		]
@@ -36,7 +35,13 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -DNDEBUG -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk"
+					"fragment" : "-O3 -DNDEBUG -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "syncbreaker_darwin_EXPORTS"
 				}
 			],
 			"language" : "C",
@@ -47,8 +52,19 @@
 		}
 	],
 	"id" : "syncbreaker_darwin::@984fc00ce26c46eb8c96",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			}
+		],
+		"language" : "C"
+	},
 	"name" : "syncbreaker_darwin",
-	"nameOnDisk" : "syncbreaker_darwin.a",
+	"nameOnDisk" : "syncbreaker_darwin.dylib",
 	"paths" : 
 	{
 		"build" : "syncbreaker_darwin",
@@ -73,5 +89,5 @@
 			"sourceGroupIndex" : 0
 		}
 	],
-	"type" : "STATIC_LIBRARY"
+	"type" : "SHARED_LIBRARY"
 }

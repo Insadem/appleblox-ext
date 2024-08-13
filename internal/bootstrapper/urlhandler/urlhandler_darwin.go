@@ -1,9 +1,15 @@
 package urlhandler
 
 import (
+	"insadem/multi-roblox/pkg/fspath"
 	"sync"
 
 	"github.com/ebitengine/purego"
+)
+
+const (
+	ROBLOX_BUNDLE_IDENTIFIER = "com.roblox.RobloxPlayer"
+	APP_BUNDLE_IDENTIFIER    = "" // TODO: define later, maybe take it from .ENV file
 )
 
 type calldef func(bundleIdentifier, urlScheme string) int
@@ -15,7 +21,12 @@ type UrlHandler struct {
 }
 
 func New() (UrlHandler, error) {
-	lib, err := purego.Dlopen("liburlhandler.a", purego.RTLD_NOW|purego.RTLD_GLOBAL)
+	dir, err := fspath.LibDir.Get()
+	if err != nil {
+		return UrlHandler{}, err
+	}
+
+	lib, err := purego.Dlopen(dir+"/urlhandler_darwin.dylib", purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		return UrlHandler{}, err
 	}
@@ -27,6 +38,7 @@ func New() (UrlHandler, error) {
 	return UrlHandler{
 		set:   set,
 		check: check,
+		mut:   &sync.Mutex{},
 	}, nil
 }
 
@@ -34,11 +46,20 @@ func (u UrlHandler) Set(bundleIdentifier, urlScheme string) bool {
 	u.mut.Lock()
 	defer u.mut.Unlock()
 
-	u.set()
+	if u.set(bundleIdentifier, urlScheme) == 0 {
+		return true
+	} else {
+		return false
+	}
 }
 
 func (u UrlHandler) Check(bundleIdentifier, urlScheme string) bool {
 	u.mut.Lock()
 	defer u.mut.Unlock()
 
+	if u.check(bundleIdentifier, urlScheme) == 0 {
+		return true
+	} else {
+		return false
+	}
 }

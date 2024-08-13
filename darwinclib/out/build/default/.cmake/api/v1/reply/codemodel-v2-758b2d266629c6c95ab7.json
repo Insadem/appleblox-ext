@@ -95,14 +95,14 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "syncbreaker_darwin::@984fc00ce26c46eb8c96",
-					"jsonFile" : "target-syncbreaker_darwin-Release-d3523adf7fde87cc6848.json",
+					"jsonFile" : "target-syncbreaker_darwin-Release-4822e2d9a993e28be52d.json",
 					"name" : "syncbreaker_darwin",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "urlhandler_darwin::@97ad8888d6c4df172bd0",
-					"jsonFile" : "target-urlhandler_darwin-Release-b961feeaa0bce02e6ccd.json",
+					"jsonFile" : "target-urlhandler_darwin-Release-cd90254961a74d6bf15c.json",
 					"name" : "urlhandler_darwin",
 					"projectIndex" : 2
 				}

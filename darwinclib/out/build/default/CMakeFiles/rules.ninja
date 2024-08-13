@@ -30,11 +30,11 @@ rule C_COMPILER__syncbreaker_darwin_unscanned_Release
 
 
 #############################################
-# Rule for linking C static library.
+# Rule for linking C shared library.
 
-rule C_STATIC_LIBRARY_LINKER__syncbreaker_darwin_Release
-  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.30.2/bin/cmake -E rm -f $TARGET_FILE && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.30.2/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
-  description = Linking C static library $TARGET_FILE
+rule C_SHARED_LIBRARY_LINKER__syncbreaker_darwin_Release
+  command = $PRE_LINK && clang $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS -dynamiclib -Wl,-headerpad_max_install_names $LINK_FLAGS -o $TARGET_FILE $SONAME_FLAG $INSTALLNAME_DIR$SONAME $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  description = Linking C shared library $TARGET_FILE
   restat = $RESTAT
 
 
@@ -49,11 +49,11 @@ rule C_COMPILER__urlhandler_darwin_unscanned_Release
 
 
 #############################################
-# Rule for linking C static library.
+# Rule for linking C shared library.
 
-rule C_STATIC_LIBRARY_LINKER__urlhandler_darwin_Release
-  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.30.2/bin/cmake -E rm -f $TARGET_FILE && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc $TARGET_FILE $LINK_FLAGS $in && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.30.2/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
-  description = Linking C static library $TARGET_FILE
+rule C_SHARED_LIBRARY_LINKER__urlhandler_darwin_Release
+  command = $PRE_LINK && clang $LANGUAGE_COMPILE_FLAGS $ARCH_FLAGS -dynamiclib -Wl,-headerpad_max_install_names $LINK_FLAGS -o $TARGET_FILE $SONAME_FLAG $INSTALLNAME_DIR$SONAME $in $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  description = Linking C shared library $TARGET_FILE
   restat = $RESTAT
 
 

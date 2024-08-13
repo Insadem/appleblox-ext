@@ -20,16 +20,41 @@ func findLibDir(path string) string {
 	}
 }
 
+func libDirPath(path string) (string, error) {
+	ld := findLibDir(path)
+	if ld == "" {
+		return "", os.ErrNotExist
+	}
+
+	dir := "/" + ld
+	if _, err := os.Stat(dir); err != nil && os.IsNotExist(err) {
+		return "", err
+	}
+
+	return dir, nil
+}
+
 var LibDir = New(func() (string, error) {
 	pth, err := os.Executable()
 	if err != nil {
 		return "", err
 	}
 
-	dir := "/" + findLibDir(pth)
-	if _, err := os.Stat(dir); err != nil && os.IsNotExist(err) {
-		return "", err
+	pth, err = libDirPath(pth)
+	if err != nil {
+		// Try fallback to current work directory, for example when testing
+		pth, err = os.Getwd()
+		if err != nil {
+			return "", err
+		}
+
+		pth, err = libDirPath(pth)
+		if err != nil {
+			return "", err
+		}
+
+		return pth, nil
 	}
 
-	return dir, nil
+	return pth, nil
 })
