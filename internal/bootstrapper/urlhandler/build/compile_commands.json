@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/build",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc   -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk -o CMakeFiles/urlcatcher.dir/urlcatcher.c.o -c /Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/urlcatcher.c",
-  "file": "/Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/urlcatcher.c",
-  "output": "CMakeFiles/urlcatcher.dir/urlcatcher.c.o"
-}
-]

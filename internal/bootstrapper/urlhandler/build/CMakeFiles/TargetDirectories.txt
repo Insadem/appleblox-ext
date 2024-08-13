@@ -1,3 +1,0 @@
-/Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/build/CMakeFiles/urlcatcher.dir
-/Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/build/CMakeFiles/edit_cache.dir
-/Users/mark/dev/projects/golang/appleblox-ext/internal/multi-roblox/urlcatcher/build/CMakeFiles/rebuild_cache.dir
