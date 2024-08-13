@@ -1,23 +1,40 @@
 package syncbreaker
 
-// #include <stdio.h>
-// #include <semaphore.h>
-// int destroy_semaphore()
-// {
-//     const char *sem_name = "/RobloxPlayerUniq";
-//     if (sem_unlink(sem_name) == -1) // Attempt to destroy the semaphore
-//     {
-//         return 1;
-//     }
-//     return 0;
-// }
-import "C"
-import "errors"
+import (
+	"errors"
+	"insadem/multi-roblox/pkg/fspath"
 
-func Break() error {
-	num := int(C.destroy_semaphore())
-	if num != 0 {
+	"github.com/ebitengine/purego"
+)
+
+type calldef func() int
+type Breaker struct {
+	destroySemaphore calldef
+}
+
+func New() (Breaker, error) {
+	dir, err := fspath.LibDir.Get()
+	if err != nil {
+		return Breaker{}, err
+	}
+
+	lib, err := purego.Dlopen(dir+"/syncbreaker_darwin.dylib", purego.RTLD_NOW|purego.RTLD_GLOBAL)
+	if err != nil {
+		return Breaker{}, err
+	}
+
+	var destroySemaphore calldef
+	purego.RegisterLibFunc(&destroySemaphore, lib, "destroySemaphore")
+
+	return Breaker{
+		destroySemaphore: destroySemaphore,
+	}, nil
+}
+
+func (b Breaker) Break() error {
+	if b.destroySemaphore() != 0 {
 		return errors.New("couldn't destroy semaphore")
 	}
+
 	return nil
 }
